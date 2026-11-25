@@ -1,0 +1,120 @@
+<DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Lógica na Prática — Tabela-Verdade Interativa</title>
+    <meta name="theme-color" content="#2563eb" />
+    <link rel="manifest" href="manifest.json" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <main class="app-container">
+        <!-- TELA INICIAL / SELEÇÃO DE FASES -->
+        <section id="home-view" class="home-view">
+            <header class="home-header">
+                <!-- [ATUALIZAÇÃO] Barra para alternar entre Módulo 1 e Módulo 2 -->
+                <div class="modules-bar" id="modules-bar" role="tablist" aria-label="Módulos"></div>
+
+                <!-- [ATUALIZAÇÃO] id adicionado para o app.js trocar a tag conforme o módulo ativo -->
+                <span class="tag" id="home-module-tag">MÓDULO 1 • DO ZERO AO PRÁTICO</span>
+                <h1>Lógica na Prática</h1>
+
+                <!-- [ATUALIZAÇÃO] id adicionado para o app.js trocar o subtítulo conforme o módulo ativo -->
+                <p class="home-subtitle" id="home-module-subtitle">
+                    Domine tabelas-verdade passo a passo com feedback imediato. Escolha uma fase para começar:
+                </p>
+                <div class="home-record">
+                    <span>🏆 Melhor sequência: <strong id="home-best-streak">0</strong></span>
+                </div>
+            </header>
+
+            <div class="stages-list" id="stages-list">
+                <!-- Cards das fases gerados pelo app.js -->
+            </div>
+
+            <button type="button" class="btn btn-next" id="btn-start-recommended">
+                Começar treino →
+            </button>
+
+            <button type="button" class="btn-reset" id="btn-reset-progress">
+                Limpar progresso salvo
+            </button>
+        </section>
+
+        <!-- TELA DA TABELA-VERDADE -->
+        <section id="game-view" class="game-view hidden">
+            <header class="top-bar">
+                <button type="button" class="btn-back" id="btn-back-home" aria-label="Voltar para as fases">
+                    ← Fases
+                </button>
+                <div class="progress-wrapper" aria-label="Progresso da lição">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+                <div class="stats">
+                    <span class="badge streak" id="streak-badge" title="Acertos seguidos">🔥 0</span>
+                    <span class="badge level" id="level-badge">Fase 1/4</span>
+                </div>
+            </header>
+
+            <section class="lesson-card">
+                <span class="tag" id="connective-tag">CONECTIVO E (∧)</span>
+                <h2 id="lesson-title">Monte a Tabela-Verdade</h2>
+                <p class="rule-box" id="rule-text">
+                    Regra de ouro: no conectivo <strong>E</strong>, o resultado só é <strong>V</strong> quando <em>as duas</em> afirmações são verdadeiras.
+                </p>
+
+                <div class="propositions-box">
+                    <div class="prop-item">
+                        <span class="prop-letter">P</span>
+                        <span class="prop-desc" id="prop-p-text">"O edital foi publicado."</span>
+                    </div>
+                    <div class="prop-item">
+                        <span class="prop-letter">Q</span>
+                        <span class="prop-desc" id="prop-q-text">"Fiz a minha inscrição."</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="table-section">
+                <div id="stage-body">
+                    <table class="truth-table" aria-label="Tabela-Verdade">
+                        <thead>
+                            <tr>
+                                <th>P</th>
+                                <th>Q</th>
+                                <th id="formula-header">P ∧ Q</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-body">
+                            <!-- Linhas geradas dinamicamente pelo app.js -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <div class="feedback-banner" id="feedback-banner" role="status" aria-live="polite">
+                Toque em&nbsp;<strong>V</strong>&nbsp;ou&nbsp;<strong>F</strong>&nbsp;abaixo para preencher a célula destacada.
+            </div>
+
+            <footer class="controls" id="controls-area">
+                <button type="button" class="btn btn-v" data-value="V">V <small>(Verdadeiro)</small></button>
+                <button type="button" class="btn btn-f" data-value="F">F <small>(Falso)</small></button>
+            </footer>
+
+            <div class="next-stage-area hidden" id="next-stage-area">
+                <button type="button" class="btn btn-next" id="btn-next-stage">Continuar para a próxima fase →</button>
+            </div>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+    <script>
+        if ("serviceWorker" in navigator) {
+            window.addEventListener("load", () => {
+                navigator.serviceWorker.register("./sw.js");
+            });
+        }
+    </script>
+</body>
+</html>
